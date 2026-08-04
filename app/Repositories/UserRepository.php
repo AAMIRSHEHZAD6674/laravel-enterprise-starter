@@ -5,8 +5,13 @@ namespace App\Repositories;
 use App\Interfaces\UserRepositoryInterface;
 use App\Models\User;
 
-class UserRepository implements UserRepositoryInterface
+class UserRepository extends BaseRepository implements UserRepositoryInterface
 {
+   
+   public function __construct(User $model)
+    {
+        $this->model = $model;
+    }
     public function create(array $data): User
     {
         return User::create($data);
