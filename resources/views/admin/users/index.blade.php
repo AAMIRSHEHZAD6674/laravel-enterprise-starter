@@ -70,7 +70,10 @@
                         </td>
 
                         <td class="border p-3">
-                            Edit | Delete
+                            <a href="{{ route('users.edit', $user) }}"
+   class="text-blue-600">
+    Edit
+</a> | Delete
                         </td>
 
                     </tr>

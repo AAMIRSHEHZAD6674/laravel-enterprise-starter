@@ -11,4 +11,6 @@ interface UserServiceInterface  extends BaseServiceInterface
     public function search(array $filters);
 
     public function createUser(array $data);
+
+    public function updateUser(User $user, array $data): bool;
 }

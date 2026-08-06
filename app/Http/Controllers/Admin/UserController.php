@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Interfaces\UserServiceInterface;
 use App\Http\Requests\UserSearchRequest;
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
+use App\Models\User;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
@@ -40,5 +42,24 @@ class UserController extends Controller
         return redirect()
             ->route('users.index')
             ->with('success', 'User created successfully.');
+    }
+
+    public function edit(User $user)
+    {
+        $roles = Role::pluck('name', 'name');
+
+        return view('admin.users.edit', compact('user', 'roles'));
+    }
+
+    public function update(UpdateUserRequest $request, User $user)
+    {
+        $this->userService->updateUser(
+            $user,
+            $request->validated()
+        );
+
+        return redirect()
+            ->route('users.index')
+            ->with('success', 'User updated successfully.');
     }
 }

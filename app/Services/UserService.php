@@ -42,4 +42,19 @@ class UserService extends BaseService implements UserServiceInterface
             return $user;
         });
     }
+
+    public function updateUser(User $user, array $data): bool
+    {
+        return DB::transaction(function () use ($user, $data) {
+
+            $updated = $this->repository->updateUser($user, [
+                'name' => $data['name'],
+                'email' => $data['email'],
+            ]);
+
+            $user->syncRoles([$data['role']]);
+
+            return $updated;
+        });
+    }
 }
