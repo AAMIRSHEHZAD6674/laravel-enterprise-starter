@@ -7,19 +7,17 @@ use App\Interfaces\UserServiceInterface;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
-class UserService implements UserServiceInterface
+class UserService extends BaseService implements UserServiceInterface
 {
-    public function __construct(
-        private UserRepositoryInterface $repository
-    ) {
+    public function __construct(UserRepositoryInterface $repository)
+    {
+        parent::__construct($repository);
     }
 
     public function register(array $data): User
     {
-        return $this->repository->create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        $data['password'] = Hash::make($data['password']);
+
+        return $this->repository->create($data);
     }
 }
