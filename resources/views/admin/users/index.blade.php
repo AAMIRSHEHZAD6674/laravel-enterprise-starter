@@ -8,7 +8,7 @@
                 User Management
             </h2>
 
-            <a href="#"
+            <a href="{{ route('users.create') }}"
                class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
 
                 Add User
@@ -16,7 +16,23 @@
             </a>
 
         </div>
+        <form method="GET" class="mb-5 flex gap-3">
 
+        <input
+            type="text"
+            name="search"
+            value="{{ request('search') }}"
+            placeholder="Search users..."
+            class="border rounded px-3 py-2">
+
+        <button
+            class="bg-blue-600 text-white px-4 rounded">
+
+            Search
+
+        </button>
+
+    </form>
         <table class="min-w-full border">
 
             <thead>

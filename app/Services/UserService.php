@@ -6,6 +6,7 @@ use App\Interfaces\UserRepositoryInterface;
 use App\Interfaces\UserServiceInterface;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class UserService extends BaseService implements UserServiceInterface
 {
@@ -19,5 +20,26 @@ class UserService extends BaseService implements UserServiceInterface
         $data['password'] = Hash::make($data['password']);
 
         return $this->repository->create($data);
+    }
+
+    public function search(array $filters)
+    {
+        return $this->repository->search($filters);
+    }
+
+    public function createUser(array $data)
+    {
+        return DB::transaction(function () use ($data) {
+
+            $user = $this->repository->createUser([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+            ]);
+
+            $user->assignRole($data['role']);
+
+            return $user;
+        });
     }
 }
