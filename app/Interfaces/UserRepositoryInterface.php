@@ -13,4 +13,16 @@ interface UserRepositoryInterface extends BaseRepositoryInterface
     public function createUser(array $data);
 
     public function updateUser(User $user, array $data): bool;
+
+    public function softDelete(User $user): bool;
+
+    public function restore(int $id): bool;
+
+    public function forceDelete(int $id): bool;
+
+    public function getTrashed();
+
+    public function paginateUsers(array $filters = [], int $perPage = 10);
+
+    public function updateStatus(User $user, bool $status): bool;
 }

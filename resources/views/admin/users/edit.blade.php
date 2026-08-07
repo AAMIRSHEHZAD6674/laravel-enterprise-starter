@@ -38,7 +38,20 @@ name="password"
 class="border rounded w-full p-2"
 required>
 </div>
+<select name="role" class="w-full border rounded px-3 py-2">
 
+    @foreach($roles as $role)
+
+        <option
+            value="{{ $role->name }}"
+            @selected($user->hasRole($role->name))
+        >
+            {{ $role->name }}
+        </option>
+
+    @endforeach
+
+</select>
 <div class="mb-4">
 <label>Confirm Password</label>
 <input

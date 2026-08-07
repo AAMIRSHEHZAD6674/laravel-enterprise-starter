@@ -47,22 +47,21 @@ required>
 </div>
 
 <div class="mb-4">
-<label>Role</label>
+    <label class="block mb-2 font-medium">Role</label>
 
-<select
-name="role"
-class="border rounded w-full p-2">
+    <select name="role" class="w-full border rounded px-3 py-2">
 
-@foreach($roles as $role)
+        @foreach($roles as $role)
 
-<option value="{{ $role }}">
-{{ $role }}
-</option>
+            <option value="{{ $role->name }}">
 
-@endforeach
+                {{ $role->name }}
 
-</select>
+            </option>
 
+        @endforeach
+
+    </select>
 </div>
 
 <button

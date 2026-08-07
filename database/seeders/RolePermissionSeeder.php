@@ -26,6 +26,7 @@ class RolePermissionSeeder extends Seeder
             'users.create',
             'users.edit',
             'users.delete',
+            'activity_logs.view',
         ];
 
         foreach ($permissions as $permission) {
@@ -40,6 +41,7 @@ class RolePermissionSeeder extends Seeder
             'users.view',
             'users.create',
             'users.edit',
+            'activity_logs.view',
         ]);
 
         // Manager permissions

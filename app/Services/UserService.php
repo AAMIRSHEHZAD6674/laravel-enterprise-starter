@@ -57,4 +57,37 @@ class UserService extends BaseService implements UserServiceInterface
             return $updated;
         });
     }
+
+    public function softDelete(User $user): bool
+    {
+        return $this->repository->softDelete($user);
+    }
+
+    public function restore(int $id): bool
+    {
+        return $this->repository->restore($id);
+    }
+
+    public function forceDelete(int $id): bool
+    {
+        return $this->repository->forceDelete($id);
+    }
+
+    public function getTrashed()
+    {
+        return $this->repository->getTrashed();
+    }
+
+    public function paginateUsers(array $filters = [],int $perPage = 10) 
+    {
+        return $this->repository->paginateUsers(
+            $filters,
+            $perPage
+        );
+    }
+
+    public function updateStatus(User $user, bool $status): bool
+    {
+        return $this->repository->updateStatus($user, $status);
+    }
 }
